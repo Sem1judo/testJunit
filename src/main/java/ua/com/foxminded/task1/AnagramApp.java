@@ -10,7 +10,7 @@ public class AnagramApp {
 
         Anagrammer anagrammer = new Anagrammer();
 
-        System.out.println(anagrammer.makeAnagram(example1));
+        System.out.println(anagrammer.makeAnagram("     "));
         System.out.println(anagrammer.makeAnagram(example2));
         System.out.println(anagrammer.makeAnagram(example3));
 

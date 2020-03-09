@@ -34,5 +34,5 @@ public class Anagrammer {
         }
         return reversedWord.toString();
     }
-    
+
 }
