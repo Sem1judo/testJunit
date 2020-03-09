@@ -8,34 +8,57 @@ class AnagrammerTest {
 
     Anagrammer anagrammer;
 
-    private static final String EXAMPLE1 = "abcd efgh";
-    private static final String EXAMPLE2 = "a1bcd efg!h";
-    private static final String EXAMPLE3 = "I love java programming";
-
-    private static final String CLUE = "should return anagrams";
-
-    private static final String EXPECTED1 = "dcba hgfe";
-    private static final String EXPECTED2 = "d1cba hgf!e";
-    private static final String EXPECTED3 = "I evol avaj gnimmargorp";
-
     @BeforeEach
     void init() {
         anagrammer = new Anagrammer();
     }
 
-    // Test have to reverse letters in sentence all specific symbol ought to stay in the same place
     @Test
-    @DisplayName("Testing words reversing")
-    void makeAnagram() {
-
-        String actual1 = anagrammer.makeAnagram(EXAMPLE1);
-        String actual2 = anagrammer.makeAnagram(EXAMPLE2);
-        String actual3 = anagrammer.makeAnagram(EXAMPLE3);
-
-        assertAll(
-                () -> assertEquals(EXPECTED1, actual1, CLUE),
-                () -> assertEquals(EXPECTED2, actual2, CLUE),
-                () -> assertEquals(EXPECTED3, actual3, CLUE)
-        );
+    void makeAnagramShouldThrowExceptionWhenInputIsNull() {
+        assertThrows(NullPointerException.class, () -> anagrammer.makeAnagram(null));
     }
+    @Test
+    void makeAnagramShouldReturnEmptyStringWhenInputIsEmptyString(){
+        assertEquals("",anagrammer.makeAnagram(""));
+    }
+    @Test
+    void makeAnagramShouldReturnEmptyStringWhenInputFewSpaces(){
+        assertEquals("",anagrammer.makeAnagram("   "));
+    }
+    @Test
+    void makeAnagramShouldNotReverseAnySymbolWhenInputContainsOnlyNonLetters(){
+        assertEquals("1&04@$_0-*12512",anagrammer.makeAnagram("1&04@$_0-*12512"));
+    }
+    @Test
+    void makeAnagramShouldNotReverseAnySymbolWhenInputContainsOnlyNonLettersAndSpaces(){
+        assertEquals("1&04 @$_0 -*12 51 2",anagrammer.makeAnagram("1&04 @$_0 -*12 51 2"));
+    }
+    @Test
+    void makeAnagramShouldReturnTheSameLetterWhenInputOneLetter(){
+        assertEquals("a",anagrammer.makeAnagram("a"));
+    }
+    @Test
+    void makeAnagramShouldReturnTheSameLettersWhenInputTheSameLetters(){
+        assertEquals("aaaaaaaa",anagrammer.makeAnagram("aaaaaaaa"));
+    }
+    @Test
+    void makeAnagramShouldReturnReversedWordWhenInputOneWord(){
+        assertEquals("fascinating",anagrammer.makeAnagram("gnitanicsaf"));
+    }
+    @Test
+    void makeAnagramShouldReturnReversedLettersWhenInputLettersInDifferentCases(){
+        assertEquals("AaaaAaAAAaaaaaAAaaAaaAa",anagrammer.makeAnagram("aAaaAaaAAaaaaaAAAaAaaaA"));
+    }
+    @Test
+    void makeAnagramShouldReturnReversedWordsWhenInputSeveralWords(){
+        assertEquals("This is my test",anagrammer.makeAnagram("sihT si ym tset"));
+        assertEquals("abcd efgh",anagrammer.makeAnagram("dcba hgfe"));
+    }
+    @Test
+    void makeAnagramShouldReturnReversedWordsAndNotMoveSymbolsWhenInputSeveralWordsAndSymbols(){
+        assertEquals("a1bcd efg!h",anagrammer.makeAnagram("d1cba hgf!e"));
+    }
+
+
+
 }
