@@ -26,6 +26,13 @@ class AnagrammerTest {
     }
 
     @Test
+    void makeAnagramShouldReturnEmptyStringWhenInputFewSpaces() {
+        String expected = "   ";
+        String actual = anagrammer.makeAnagram("   ");
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void makeAnagramShouldNotReverseAnySymbolWhenInputContainsOnlyNonLetters() {
         String expected = "1&04@$_0-*12512";
         String actual = anagrammer.makeAnagram("1&04@$_0-*12512");
