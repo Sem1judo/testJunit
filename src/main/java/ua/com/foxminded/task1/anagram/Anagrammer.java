@@ -6,13 +6,13 @@ import java.util.Deque;
 public class Anagrammer {
 
     private final static String DELIMITER = " ";
-    private final static String ALL_CHARACTERS_EXCEPT_SPACE = ".*\\w.*";
+    private final static String NOT_SPACE_CHAR_REGEX = ".*\\w.*";
 
     public String makeAnagram(String sentence) {
         StringBuilder anagramBuilder = new StringBuilder();
         String anagram;
 
-        if (sentence.matches(ALL_CHARACTERS_EXCEPT_SPACE)) {
+        if (sentence.matches( NOT_SPACE_CHAR_REGEX)) {
             String[] words = sentence.split(DELIMITER);
 
             for (String word : words) {
